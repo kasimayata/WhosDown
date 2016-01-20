@@ -2,7 +2,7 @@
 
 ## What it is
 
-WhosDown is an open-source Windows 10 client for WhatsApp.  More specifically, it's a wrapper for WhatsApp web.
+WhosDown is an open-source Windows 10 client for WhatsApp.  More specifically, it's a wrapper for WhatsApp Web.
 
 ## Why would I want to use this?
 
