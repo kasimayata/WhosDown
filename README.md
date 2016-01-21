@@ -13,6 +13,10 @@ WhosDown provides several advantages over just using web.whatsapp.com in your br
 3. A WhatsApp-like color theme.
 4. Can easily be pinned to taskbar or start menu.
 
+## Where can I get it?
+
+It's [right here in the Windows Store](https://www.microsoft.com/store/apps/9NBLGGH5G8JS).
+
 ## I have a problem or idea!
 
 Great!  [Create an issue](https://github.com/CamSoper/WhosDown/issues), or, better yet, fork the project and contribute!  I'm not much of an app developer (I'm more of a web guy, and I'm way out of my element with XAML...  I didn't even *attempt* MVVM!) so I appreciate whatever you want to add.
