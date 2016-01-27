@@ -20,5 +20,3 @@ It's [right here in the Windows Store](https://www.microsoft.com/store/apps/9NBL
 ## I have a problem or idea!
 
 Great!  [Create an issue](https://github.com/CamSoper/WhosDown/issues), or, better yet, fork the project and contribute!  I'm not much of an app developer (I'm more of a web guy, and I'm way out of my element with XAML...  I didn't even *attempt* MVVM!) so I appreciate whatever you want to add.
-
-test commit
