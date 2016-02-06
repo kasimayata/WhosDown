@@ -5,10 +5,12 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -125,12 +127,22 @@ namespace ChatsApp
             {
                 case CoreWindowActivationState.CodeActivated:
                 case CoreWindowActivationState.PointerActivated:
+                    ToastNotificationManager.History.Clear();  //Clear existing notifications for this app
                     Windows.Storage.ApplicationData.Current.LocalSettings.Values["IsWindowInFocus"] = true;
                     break;
 
                 case CoreWindowActivationState.Deactivated:
                     Windows.Storage.ApplicationData.Current.LocalSettings.Values["IsWindowInFocus"] = false;
                     break;
+            }
+        }
+
+        public static bool IsMobile
+        {
+            get
+            {
+                var qualifiers = Windows.ApplicationModel.Resources.Core.ResourceContext.GetForCurrentView().QualifierValues;
+                return (qualifiers.ContainsKey("DeviceFamily") && qualifiers["DeviceFamily"] == "Mobile");
             }
         }
     }

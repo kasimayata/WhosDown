@@ -18,6 +18,8 @@ using Windows.Web.Http;
 using System.Text.RegularExpressions;
 using Windows.UI.ViewManagement;
 using Windows.UI;
+using Windows.System;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -29,6 +31,7 @@ namespace ChatsApp
     public sealed partial class MainPage : Page
     {
         public int _NewConversationCount = 0;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -36,19 +39,40 @@ namespace ChatsApp
 
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
+        private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             
 
             AboutText.Text = this.ApplicationVersion;
-
             NotificationToggle.IsOn = this.EnableNotifications;
+            if(Windows.Storage.ApplicationData.Current.LocalSettings.Values["AdvancedMode"] != null)
+            {
+                MySplitView.DisplayMode = SplitViewDisplayMode.Overlay;
+            }
 
             HttpRequestMessage req = new HttpRequestMessage(HttpMethod.Get, new Uri("https://web.whatsapp.com"));
             req.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2486.0 Safari/537.36");
             this.MyWebview.NavigateWithHttpRequestMessage(req);
 
+            var mobileWarned = Windows.Storage.ApplicationData.Current.LocalSettings.Values["MobileWarned"];
+
+            if (App.IsMobile && mobileWarned == null)
+            {
+                var message = "Hey, it looks like you're running this on Windows 10 Mobile! That's cool, just be aware this is meant for running on a " +
+                                "second monitor with Continuum. If you don't have a second screen (or a second device with the official WhatsApp app), you're not going to " +
+                                "be able to scan this QR code." + 
+                                "\r\n\r\n" +
+                                "I won't bug you about this again.";
+                var dialog = new MessageDialog(message);
+                dialog.Commands.Add(new UICommand("Got it!"));
+                dialog.CancelCommandIndex = 0;
+                await dialog.ShowAsync();
+
+                Windows.Storage.ApplicationData.Current.LocalSettings.Values["MobileWarned"] = true;
+            }
+
         }
+
 
         private void MyWebview_PermissionRequested(WebView sender, WebViewPermissionRequestedEventArgs args)
         {
@@ -176,6 +200,26 @@ namespace ChatsApp
         private void NotificationToggle_Toggled(object sender, RoutedEventArgs e)
         {
             this.EnableNotifications = NotificationToggle.IsOn;
+        }
+
+        private async void AdvancedMode_Click(object sender, RoutedEventArgs e)
+        {
+            var warning = "This option will permanently remove the left side menu.  You won't be able to regain access to the menu or this settings pane until you re-install WhosDown." +
+                            "\r\n\r\n" +
+                            "Are you sure?";
+            var message = new MessageDialog(warning, "Warning");
+            message.Commands.Add(new UICommand("OK", new UICommandInvokedHandler(HandleAdvancedModeDialog)));
+            message.Commands.Add(new UICommand("Cancel"));
+            message.DefaultCommandIndex = 1;
+            message.CancelCommandIndex = 1;
+            await message.ShowAsync();
+        }
+
+        private void HandleAdvancedModeDialog(IUICommand command)
+        {
+            ContentSplitView.IsPaneOpen = false;
+            MySplitView.DisplayMode = SplitViewDisplayMode.Overlay;
+            Windows.Storage.ApplicationData.Current.LocalSettings.Values["AdvancedMode"] = true;
         }
     }
 }

@@ -5,10 +5,10 @@
     xmlns:local="using:ChatsApp"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Loaded="Page_Loaded">
+    mc:Ignorable="d" Loaded="Page_Loaded" >
 
-    <SplitView x:Name="MySplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
-                CompactPaneLength="50" OpenPaneLength="150">
+    <SplitView x:Name="MySplitView"  IsPaneOpen="False" 
+                CompactPaneLength="50" OpenPaneLength="150" DisplayMode="CompactOverlay">
         <SplitView.Pane>
             <StackPanel Background="#009688">
                 <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
@@ -18,12 +18,11 @@
                      Width="50" Height="50" Background="Transparent" Click="SettingsButton_Click" Foreground="White" />
                     <TextBlock Text="Settings" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
                 </StackPanel>
-                
             </StackPanel>
         </SplitView.Pane>
         <SplitView.Content>
-            <SplitView x:Name="ContentSplitView" DisplayMode="CompactOverlay"  IsPaneOpen="False" 
-                CompactPaneLength="0" OpenPaneLength="300" PanePlacement="Left">
+            <SplitView x:Name="ContentSplitView"  IsPaneOpen="False" 
+                OpenPaneLength="300" PanePlacement="Right">
                 <SplitView.Pane>
                     <StackPanel Background="#DCF8C6">
                         <StackPanel Margin="10" Orientation="Vertical">
@@ -35,6 +34,7 @@
                             <TextBlock Name="AboutText" />
                             <HyperlinkButton NavigateUri="https://github.com/CamSoper/WhosDown/blob/master/README.md">Home Page</HyperlinkButton>
                             <HyperlinkButton NavigateUri="https://github.com/CamSoper/WhosDown/blob/master/PRIVACY.md">Privacy Policy</HyperlinkButton>
+                            <Button Name="AdvancedMode" Content="Remove Side Menu" Margin="0 50 0 0" Click="AdvancedMode_Click" />
                         </StackPanel>
                     </StackPanel>
                 </SplitView.Pane>
