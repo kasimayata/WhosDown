@@ -7,45 +7,49 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d" Loaded="Page_Loaded" >
 
-    <SplitView x:Name="MySplitView"  IsPaneOpen="False" 
-                CompactPaneLength="50" OpenPaneLength="150" DisplayMode="CompactOverlay">
+
+    <SplitView x:Name="ContentSplitView"  IsPaneOpen="False" 
+                OpenPaneLength="300" PanePlacement="Left">
         <SplitView.Pane>
-            <StackPanel Background="#009688">
-                <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
-                     Width="50" Height="50" Background="Transparent" Click="HamburgerButton_Click" Foreground="White" />
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="SettingsButton" FontFamily="Segoe MDL2 Assets" Content="&#xE115;"
-                     Width="50" Height="50" Background="Transparent" Click="SettingsButton_Click" Foreground="White" />
-                    <TextBlock Text="Settings" FontSize="16" VerticalAlignment="Center" Foreground="White"/>
+            <StackPanel Background="#DCF8C6">
+                <StackPanel Margin="10" Orientation="Vertical">
+                    <TextBlock Text="Settings" FontSize="18" FontWeight="Bold" />
+                    <StackPanel Orientation="Vertical" Margin="0 15 0 0">
+                        <TextBlock Text="Notifications" />
+                        <ToggleSwitch Name="NotificationToggle" Toggled="NotificationToggle_Toggled" />
+                    </StackPanel>
+                    <TextBlock Name="AboutText" />
+                    <HyperlinkButton NavigateUri="https://github.com/CamSoper/WhosDown/blob/master/README.md">Home Page</HyperlinkButton>
+                    <HyperlinkButton NavigateUri="https://github.com/CamSoper/WhosDown/blob/master/PRIVACY.md">Privacy Policy</HyperlinkButton>
                 </StackPanel>
             </StackPanel>
         </SplitView.Pane>
+
         <SplitView.Content>
-            <SplitView x:Name="ContentSplitView"  IsPaneOpen="False" 
-                OpenPaneLength="300" PanePlacement="Right">
-                <SplitView.Pane>
-                    <StackPanel Background="#DCF8C6">
-                        <StackPanel Margin="10" Orientation="Vertical">
-                            <TextBlock Text="Settings" FontSize="18" FontWeight="Bold" />
-                            <StackPanel Orientation="Vertical" Margin="0 15 0 0">
-                                <TextBlock Text="Notifications" />
-                                <ToggleSwitch Name="NotificationToggle" Toggled="NotificationToggle_Toggled" />
-                            </StackPanel>
-                            <TextBlock Name="AboutText" />
-                            <HyperlinkButton NavigateUri="https://github.com/CamSoper/WhosDown/blob/master/README.md">Home Page</HyperlinkButton>
-                            <HyperlinkButton NavigateUri="https://github.com/CamSoper/WhosDown/blob/master/PRIVACY.md">Privacy Policy</HyperlinkButton>
-                            <Button Name="AdvancedMode" Content="Remove Side Menu" Margin="0 50 0 0" Click="AdvancedMode_Click" />
-                        </StackPanel>
-                    </StackPanel>
-                </SplitView.Pane>
-                
-                <SplitView.Content>
-                    <Grid>
-                        <WebView Name="MyWebview" PermissionRequested="MyWebview_PermissionRequested" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid Background="#009688" Grid.Row="0" x:Name="TitleBar">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid x:Name="SettingsButtonGrid">
+                        <Button x:Name="SettingsButton" Background="Transparent" Foreground="White" FontFamily="Segoe MDL2 Assets" FontSize="14" Content="&#xE700;" Click="SettingsButton_Click" />
                     </Grid>
-                </SplitView.Content>
-            </SplitView>
+                    <Grid Grid.Column="1" x:Name="MainTitleBar" Background="Transparent">
+                        <TextBlock x:Name="TitleText" Text="WhosDown" VerticalAlignment="Center" FontSize="12" FontFamily="Segoe UI" FontWeight="Normal" Margin="10,0" Foreground="White" />
+                    </Grid>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <WebView Name="MyWebview" PermissionRequested="MyWebview_PermissionRequested" />
+                </Grid>
+            </Grid>
         </SplitView.Content>
     </SplitView>
+
 
 </Page>
