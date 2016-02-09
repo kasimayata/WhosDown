@@ -19,7 +19,7 @@
                         <ToggleSwitch Name="NotificationToggle" Toggled="NotificationToggle_Toggled" />
                     </StackPanel>
                     <TextBlock Name="AboutText" />
-                    <HyperlinkButton NavigateUri="https://github.com/CamSoper/WhosDown/blob/master/README.md">Home Page</HyperlinkButton>
+                    <HyperlinkButton NavigateUri="https://github.com/CamSoper/WhosDown/blob/master/README.md">WhosDown GitHub Project Page</HyperlinkButton>
                     <HyperlinkButton NavigateUri="https://github.com/CamSoper/WhosDown/blob/master/PRIVACY.md">Privacy Policy</HyperlinkButton>
                 </StackPanel>
             </StackPanel>
